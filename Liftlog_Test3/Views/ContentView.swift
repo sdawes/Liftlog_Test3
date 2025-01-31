@@ -6,16 +6,16 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Text("Hello, Steve!")
-        }
-        .padding()
+        Text("Liftlog Test 3")
+            .padding()
     }
 }
 
 #Preview {
     ContentView()
+        .modelContainer(for: [Exercise.self, WorkoutSet.self])
 }
