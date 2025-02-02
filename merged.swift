@@ -73,9 +73,12 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
+    @Environment(\.modelContext) private var modelContext
+    @Query private var exercises: [Exercise]
+
     var body: some View {
         Text("Liftlog Test 3")
-            .padding()
+            .padding()        
     }
 }
 
@@ -100,6 +103,6 @@ struct Liftlog_Test3App: App {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(for: Exercise.self, WorkoutSet.self)
+        .modelContainer(for: [Exercise.self, WorkoutSet.self], inMemory: true)
     }
 }

@@ -9,9 +9,35 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
+    @Environment(\.modelContext) private var modelContext
+    @Query private var exercises: [Exercise]
+
     var body: some View {
-        Text("Liftlog Test 3")
-            .padding()
+        NavigationStack {
+            List {
+                ForEach(exercises) { exercise in
+                    VStack(alignment: .leading) {
+                        Text(exercise.name)
+                        Text(exercise.category)
+                        Text(exercise.notes)
+                    }
+                }
+            }
+            .navigationTitle("Exercises")
+            .toolbar {
+                Button("Add Samples", action: addSamples)
+            }
+        }
+    }
+
+    func addSamples() {
+        let exercise1 = Exercise(name: "Bench Press", category: "Push", notes: "Chest exercise")
+        let exercise2 = Exercise(name: "Squat", category: "Legs", notes: "Quadriceps exercise")
+        let exercise3 = Exercise(name: "Deadlift", category: "Pull", notes: "Back exercise")
+
+        modelContext.insert(exercise1)
+        modelContext.insert(exercise2)
+        modelContext.insert(exercise3)
     }
 }
 
